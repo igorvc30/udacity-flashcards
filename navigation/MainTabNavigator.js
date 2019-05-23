@@ -27,11 +27,11 @@ HomeStack.navigationOptions = {
   )
 };
 
-const LinksStack = createStackNavigator({
+const DeckFormStack = createStackNavigator({
   DeckForm: DeckForm
 });
 
-LinksStack.navigationOptions = {
+DeckFormStack.navigationOptions = {
   tabBarLabel: "NEW DECK",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -43,5 +43,5 @@ LinksStack.navigationOptions = {
 
 export default createMaterialTopTabNavigator({
   HomeStack,
-  LinksStack
+  DeckFormStack
 });
