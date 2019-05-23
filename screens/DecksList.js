@@ -7,50 +7,83 @@ import {
   CardItem,
   Text,
   Button,
-  Icon,
   Left,
   Body,
-  Right
+  Right,
+  H2
 } from "native-base";
-export default class DecksList extends Component {
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { connect } from "react-redux";
+class DecksList extends Component {
   static navigationOptions = {
     title: "DECKS AVAILABLE"
   };
 
   render() {
+    const { decks, decksIds } = this.props;
     return (
       <Container>
-        <Header />
         <Content>
-          <Card>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>GeekyAnts</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>12 Likes</Text>
-                </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>4 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-          </Card>
+          {decksIds.map(id => {
+            const deck = decks[id];
+            return (
+              <Card
+                key={id}
+                header={deck.title}
+                style={{
+                  backgroundColor: "green",
+                  borderRadius: 2,
+                  borderColor: "#008800",
+                  backgroundColor: "#008800",
+                  background: "#008800"
+                }}
+              >
+                <CardItem
+                  header
+                  style={{
+                    backgroundColor: "green",
+                    borderRadius: 8
+                  }}
+                >
+                  <H2>{deck.title}</H2>
+                </CardItem>
+                <CardItem
+                  style={{
+                    backgroundColor: "green",
+                    borderRadius: 2
+                  }}
+                >
+                  <Left>
+                    <MaterialCommunityIcons name="cards" size={20} />
+                    <Text>
+                      {deck.questions ? deck.questions.length : 0} Cards
+                    </Text>
+                  </Left>
+                  <Left>
+                    <MaterialCommunityIcons name="check-decagram" size={20} />
+                    <Text>{deck.numberOfAttempts} Attempts</Text>
+                  </Left>
+                  <Left>
+                    <MaterialCommunityIcons name="trophy" size={20} />
+                    <Text>{deck.highestScore} Score</Text>
+                  </Left>
+                </CardItem>
+              </Card>
+            );
+          })}
+
+          <Text>{JSON.stringify(decks)}</Text>
         </Content>
       </Container>
     );
   }
 }
+
+function mapStateToProps(decks) {
+  return {
+    decks,
+    decksIds: Object.keys(decks)
+  };
+}
+
+export default connect(mapStateToProps)(DecksList);

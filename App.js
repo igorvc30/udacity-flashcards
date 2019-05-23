@@ -1,6 +1,9 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import reducer from "./reducers";
 import { Constants } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 
@@ -28,10 +31,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {this.getStatusBar()}
-          <AppNavigator />
-        </View>
+        <Provider store={createStore(reducer)}>
+          <View style={styles.container}>
+            {this.getStatusBar()}
+            <AppNavigator />
+          </View>
+        </Provider>
       );
     }
   }

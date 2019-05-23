@@ -1,56 +1,103 @@
 import React, { Component } from "react";
 import {
   Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Text,
   Button,
+  Text,
   Icon,
-  Left,
-  Body,
-  Right
+  Form,
+  Item,
+  Input,
+  Label,
+  H1
 } from "native-base";
-export default class DeckForm extends Component {
+import { connect } from "react-redux";
+import { Col, Row, Grid } from "react-native-easy-grid";
+import { KeyboardAvoidingView } from "react-native";
+import { createDeck } from "./../actions/index";
+
+class DeckForm extends Component {
   static navigationOptions = {
     title: "CREATE NEW DECK"
   };
 
+  state = {
+    title: "Testes hurry"
+  };
+
+  handleSubmit() {
+    if (this.state.title.length > 0) {
+      this.props.createDeck(this.state);
+    }
+    this.setState({ title: "submitido?" });
+  }
+
   render() {
     return (
       <Container>
-        <Header />
-        <Content>
-          <Card>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>GeekyAnts</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent>
-                  <Icon active name="thumbs-up" />
-                  <Text>12 Likes</Text>
+        <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+          <Grid>
+            <Row
+              size={35}
+              style={{
+                alignItems: "center",
+                margin: 10
+              }}
+            >
+              <H1
+                style={{
+                  alignContent: "center"
+                }}
+              >
+                WHAT IS THE TITLE OF YOUR NEW DECK?
+              </H1>
+            </Row>
+
+            <Row
+              size={65}
+              style={{
+                alignItems: "center",
+                alignContent: "center"
+              }}
+            >
+              <Form>
+                <Item stackedLabel>
+                  <Label>Deck title</Label>
+                  <Input
+                    onChangeText={inputVal =>
+                      this.setState({ title: inputVal })
+                    }
+                    value={this.state.title}
+                  />
+                </Item>
+                <Button
+                  iconLeft
+                  block
+                  style={{ marginLeft: 10, marginTop: 20 }}
+                  onPress={() => this.handleSubmit()}
+                >
+                  <Icon name="send" />
+                  <Text>SUBMIT</Text>
                 </Button>
-              </Left>
-              <Body>
-                <Button transparent>
-                  <Icon active name="chatbubbles" />
-                  <Text>4 Comments</Text>
-                </Button>
-              </Body>
-              <Right>
-                <Text>11h ago</Text>
-              </Right>
-            </CardItem>
-          </Card>
-        </Content>
+
+                <Item>
+                  <Text>{JSON.stringify(this.state)}</Text>
+                </Item>
+              </Form>
+            </Row>
+          </Grid>
+        </KeyboardAvoidingView>
       </Container>
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    createDeck: deck => dispatch(createDeck(deck))
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DeckForm);
