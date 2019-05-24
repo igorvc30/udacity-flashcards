@@ -51,9 +51,9 @@ export function deleteCard(card) {
   };
 }
 
-export function submitDeck(deckId, score) {
+export function submitQuiz(deckId, score) {
   return {
-    type: SUBMIT_DECK,
+    type: SUBMIT_QUIZ,
     score,
     deckId
   };

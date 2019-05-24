@@ -22,7 +22,7 @@ const Deck = ({ deck }) => {
         header
         bordered
         style={{
-          backgroundColor: "green",
+          backgroundColor: deck.color,
           alignContent: "center",
           alignItems: "center",
           justifyContent: "center"
@@ -32,7 +32,9 @@ const Deck = ({ deck }) => {
       </CardItem>
       <CardItem
         style={{
-          backgroundColor: "green"
+          borderColor: deck.color,
+          textColor: deck.color,
+          borderWidth: 1
         }}
       >
         <Left>

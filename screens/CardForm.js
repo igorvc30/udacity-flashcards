@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addCard } from "./../actions/index";
 import {
   Container,
   Button,
@@ -9,29 +11,32 @@ import {
   Input,
   Label,
   Content,
-  H3
+  Header,
+  Left,
+  Body,
+  Title
 } from "native-base";
 import { KeyboardAvoidingView } from "react-native";
-import { connect } from "react-redux";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { addCard } from "./../actions/index";
+import GoBackHeader from "./../components/GoBackHeader";
 
 class CardForm extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: `Add new card to deck`,
-      headerLeft: (
-        <MaterialCommunityIcons
-          size={35}
-          style={{ marginLeft: 10 }}
-          name={"arrow-left"}
-          onPress={() => {
-            navigation.navigate("DeckDetail");
-          }}
-        />
-      )
-    };
-  };
+  // static navigationOptions = ({ navigation }) => {
+  //   return {
+  //     title: `Add new card to deck`,
+  //     headerLeft: (
+  //       <MaterialCommunityIcons
+  //         size={35}
+  //         style={{ marginLeft: 10 }}
+  //         name={"arrow-left"}
+  //         onPress={() => {
+  //           navigation.navigate("DeckDetail");
+  //         }}
+  //       />
+  //     )
+  //   };
+  // };
 
   state = {
     question: "Testes hurry",
@@ -47,60 +52,71 @@ class CardForm extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
-      <Container style={{ alignItems: "center", justifyContent: "center" }}>
-        <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-          <Form>
-            <Content
-              style={{
-                margin: 10,
-                alignContent: "center"
-              }}
-            >
-              <Text>WHAT IS THE QUESTION OF YOUR NEW CARD?</Text>
-              {/* </Content>
+      <Container>
+        <GoBackHeader
+          title="Add new card to deck"
+          color="#fff"
+          navigation={navigation}
+          destination="DeckDetail"
+        />
+        <Content>
+          <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+            <Form>
+              <Content
+                style={{
+                  margin: 10,
+                  alignContent: "center"
+                }}
+              >
+                <Text>WHAT IS THE QUESTION OF YOUR NEW CARD?</Text>
+                {/* </Content>
             <Content
               style={{
                 alignContent: "center"
               }}
             > */}
-              <Item stackedLabel>
-                <Label>Question</Label>
-                <Input
-                  onChangeText={inputVal =>
-                    this.setState({ question: inputVal })
-                  }
-                  value={this.state.question}
-                />
-              </Item>
-            </Content>
+                <Item stackedLabel>
+                  <Label>Question</Label>
+                  <Input
+                    onChangeText={inputVal =>
+                      this.setState({ question: inputVal })
+                    }
+                    value={this.state.question}
+                  />
+                </Item>
+              </Content>
 
-            <Content style={{ alignContent: "center" }}>
-              <Text>WHAT IS THE ANSWER OF YOUR NEW CARD?</Text>
-              {/* </Content>
+              <Content style={{ alignContent: "center" }}>
+                <Text>WHAT IS THE ANSWER OF YOUR NEW CARD?</Text>
+                {/* </Content>
             <Content> */}
-              <Item stackedLabel>
-                <Label>Answer</Label>
-                <Input
-                  onChangeText={inputVal => this.setState({ answer: inputVal })}
-                  value={this.state.answer}
-                />
-              </Item>
-            </Content>
+                <Item stackedLabel>
+                  <Label>Answer</Label>
+                  <Input
+                    onChangeText={inputVal =>
+                      this.setState({ answer: inputVal })
+                    }
+                    value={this.state.answer}
+                  />
+                </Item>
+              </Content>
 
-            <Content>
-              <Button
-                iconLeft
-                block
-                style={{ marginLeft: 0, marginTop: 20 }}
-                onPress={() => this.handleSubmit()}
-              >
-                <Icon name="send" />
-                <Text>SUBMIT</Text>
-              </Button>
-            </Content>
-          </Form>
-        </KeyboardAvoidingView>
+              <Content>
+                <Button
+                  iconLeft
+                  block
+                  style={{ marginLeft: 0, marginTop: 20 }}
+                  onPress={() => this.handleSubmit()}
+                >
+                  <Icon name="send" />
+                  <Text>SUBMIT</Text>
+                </Button>
+              </Content>
+            </Form>
+          </KeyboardAvoidingView>
+        </Content>
       </Container>
     );
   }

@@ -4,13 +4,14 @@ import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import Deck from "./../components/Deck";
 import { setDeckId } from "./../actions";
+import decksDetails from "./../reducers/index";
 class DecksList extends Component {
   static navigationOptions = {
     title: "DECKS AVAILABLE"
   };
 
   render() {
-    const { decks, decksIds, setDeckId } = this.props;
+    const { decks, decksIds, setDeckId, decksDetails } = this.props;
     return (
       <Container>
         <Content style={{ margin: 20 }}>
@@ -29,7 +30,7 @@ class DecksList extends Component {
                 </TouchableOpacity>
               );
             })}
-          <Text>{JSON.stringify(decks)}</Text>
+          <Text>{JSON.stringify(decksDetails)}</Text>
         </Content>
       </Container>
     );
@@ -39,7 +40,8 @@ class DecksList extends Component {
 function mapStateToProps(decksDetails) {
   return {
     decks: decksDetails.decks,
-    decksIds: decksDetails.decks ? Object.keys(decksDetails.decks) : []
+    decksIds: decksDetails.decks ? Object.keys(decksDetails.decks) : [],
+    decksDetails
   };
 }
 

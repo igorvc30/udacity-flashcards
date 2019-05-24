@@ -1,27 +1,21 @@
 import React, { Component } from "react";
-import { Container, Content, Text, Button } from "native-base";
+import {
+  Container,
+  Content,
+  Text,
+  Button,
+  Header,
+  Left,
+  Body,
+  Title
+} from "native-base";
 import { connect } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Deck from "../components/Deck";
 import { deleteDeck } from "./../actions";
+import GoBackHeader from "./../components/GoBackHeader";
 
 class DeckDetail extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: `Deck Detail`,
-      headerLeft: (
-        <MaterialCommunityIcons
-          size={35}
-          style={{ marginLeft: 10 }}
-          name={"arrow-left"}
-          onPress={() => {
-            navigation.navigate("Main");
-          }}
-        />
-      )
-    };
-  };
-
   delete = () => {
     const { deleteDeck, navigation, deck } = this.props;
     deleteDeck(deck.title);
@@ -29,9 +23,15 @@ class DeckDetail extends Component {
   };
 
   render() {
-    const { deck } = this.props;
+    const { deck, navigation } = this.props;
     return (
       <Container>
+        <GoBackHeader
+          title="DECK DETAIL"
+          color={deck.color}
+          navigation={navigation}
+          destination="Main"
+        />
         <Content
           style={{
             minHeight: 350,
@@ -71,25 +71,31 @@ class DeckDetail extends Component {
             <Text>ADD CARD</Text>
           </Button>
         </Content>
+        {deck.cards.length > 0 && (
+          <Content>
+            <Button
+              iconLeft
+              dark
+              block
+              transparent
+              style={{ margin: 10, borderWidth: 1, borderColor: "#000" }}
+              onPress={() => this.props.navigation.push("Quiz")}
+            >
+              <MaterialCommunityIcons
+                style={{ color: "#000" }}
+                size={30}
+                name="gamepad-variant"
+              />
+              <Text>START QUIZ</Text>
+            </Button>
+          </Content>
+        )}
+
         <Content>
-          <Button
-            iconLeft
-            dark
-            block
-            transparent
-            style={{ margin: 10, borderWidth: 1, borderColor: "#000" }}
-          >
-            <MaterialCommunityIcons
-              style={{ color: "#000" }}
-              size={30}
-              name="gamepad-variant"
-            />
-            <Text>START QUIZ</Text>
-          </Button>
+          <Text>{`STATE ${JSON.stringify(
+            this.state
+          )} >>> PROPS ${JSON.stringify(this.props)}`}</Text>
         </Content>
-        <Text>{`STATE ${JSON.stringify(this.state)} >>> PROPS ${JSON.stringify(
-          this.props
-        )}`}</Text>
       </Container>
     );
   }

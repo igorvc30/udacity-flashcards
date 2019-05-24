@@ -6,21 +6,34 @@ import {
 import DeckDetail from "../screens/DeckDetail";
 import CardForm from "../screens/CardForm";
 import MainTabNavigator from "./MainTabNavigator";
+import Quiz from "../screens/Quiz";
 
 const DeckDetailStack = createStackNavigator({
-  DeckDetail: DeckDetail
+  // DeckDetail: DeckDetail
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: { header: null }
+  }
 });
 
 const CardFormStack = createStackNavigator({
-  CardForm: CardForm
+  CardForm: {
+    screen: CardForm,
+    navigationOptions: { header: null }
+  }
 });
 
+const QuizStack = createStackNavigator({
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: { header: null }
+  }
+});
 export default createAppContainer(
   createSwitchNavigator({
-    // You could add another route here for authentication.
-    // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
     DeckDetail: DeckDetailStack,
-    CardForm: CardFormStack
+    CardForm: CardFormStack,
+    Quiz: QuizStack
   })
 );
