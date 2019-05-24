@@ -1,3 +1,4 @@
+export const SET_DECKID = "SET_DECKID";
 export const CREATE_DECK = "CREATE_DECK";
 export const DELETE_DECK = "DELETE_DECK";
 export const EDIT_DECK = "EDIT_DECK";
@@ -5,6 +6,13 @@ export const ADD_CARD = "ADD_CARD";
 export const EDIT_CARD = "EDIT_CARD";
 export const DELETE_CARD = "DELETE_CARD";
 export const SUBMIT_QUIZ = "SUBMIT_QUIZ";
+
+export function setDeckId(deckId) {
+  return {
+    type: SET_DECKID,
+    deckId
+  };
+}
 
 export function createDeck(deck) {
   return {

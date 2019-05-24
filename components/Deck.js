@@ -38,7 +38,7 @@ const Deck = ({ deck }) => {
         <Left>
           <Text>
             <MaterialCommunityIcons name="cards" size={20} />
-            {deck.questions ? deck.questions.length : 0} Cards
+            {deck.cards.length} Cards
           </Text>
         </Left>
         <Content>

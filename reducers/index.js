@@ -1,7 +1,13 @@
-import { CREATE_DECK, DELETE_DECK, ADD_CARD } from "../actions";
+import { SET_DECKID, CREATE_DECK, DELETE_DECK, ADD_CARD } from "../actions";
 
-function decks(state = {}, action) {
+function decksDetails(state = {}, action) {
   switch (action.type) {
+    case SET_DECKID: {
+      return {
+        ...state,
+        deckId: action.deckId
+      };
+    }
     case CREATE_DECK: {
       const newDeck = {
         ...action.deck,
@@ -12,19 +18,25 @@ function decks(state = {}, action) {
       };
       return {
         ...state,
-        [action.deck.title]: newDeck
+        decks: {
+          ...state.decks,
+          [action.deck.title]: newDeck
+        }
       };
     }
     case DELETE_DECK:
-      delete state[`${action.deckId}`];
+      delete state.decks[`${action.deckId}`];
       return state;
 
     case ADD_CARD:
       return {
         ...state,
-        [action.deckId]: {
-          ...state[action.deckId],
-          cards: [...state[action.deckId], action.card]
+        decks: {
+          ...state.decks,
+          [action.deckId]: {
+            ...state.decks[action.deckId],
+            cards: state.decks[action.deckId].cards.concat(action.card)
+          }
         }
       };
 
@@ -33,4 +45,4 @@ function decks(state = {}, action) {
   }
 }
 
-export default decks;
+export default decksDetails;
