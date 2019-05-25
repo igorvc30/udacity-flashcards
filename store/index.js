@@ -1,3 +1,4 @@
+// https://www.youtube.com/watch?v=LGkNjt7k4UQ
 import { createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";

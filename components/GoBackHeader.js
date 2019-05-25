@@ -12,14 +12,14 @@ const GoBackHeader = ({ title, color, navigation, destination }) => (
         onPress={() => navigation.navigate(destination)}
       >
         <MaterialCommunityIcons
-          style={{ color: "#000" }}
+          style={{ color: "white" }}
           size={30}
           name="arrow-left"
         />
       </Button>
     </Left>
     <Body>
-      <Title style={{ color: "#000" }}>{title}</Title>
+      <Title style={{ color: "white" }}>{title}</Title>
     </Body>
   </Header>
 );

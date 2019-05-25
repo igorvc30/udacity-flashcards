@@ -11,14 +11,10 @@ import {
   Input,
   Label,
   Content,
-  Header,
-  Left,
-  Body,
-  Title
+  View
 } from "native-base";
 import { KeyboardAvoidingView } from "react-native";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import GoBackHeader from "./../components/GoBackHeader";
 
 class CardForm extends Component {
@@ -41,7 +37,7 @@ class CardForm extends Component {
       <Container>
         <GoBackHeader
           title="Add new card to deck"
-          color="#fff"
+          color="black"
           navigation={navigation}
           destination="DeckDetail"
         />
@@ -55,12 +51,7 @@ class CardForm extends Component {
                 }}
               >
                 <Text>WHAT IS THE QUESTION OF YOUR NEW CARD?</Text>
-                {/* </Content>
-            <Content
-              style={{
-                alignContent: "center"
-              }}
-            > */}
+
                 <Item stackedLabel>
                   <Label>Question</Label>
                   <Input
@@ -74,8 +65,6 @@ class CardForm extends Component {
 
               <Content style={{ alignContent: "center" }}>
                 <Text>WHAT IS THE ANSWER OF YOUR NEW CARD?</Text>
-                {/* </Content>
-            <Content> */}
                 <Item stackedLabel>
                   <Label>Answer</Label>
                   <Input
@@ -86,21 +75,24 @@ class CardForm extends Component {
                   />
                 </Item>
               </Content>
-
-              <Content>
-                <Button
-                  iconLeft
-                  block
-                  style={{ marginLeft: 0, marginTop: 20 }}
-                  onPress={() => this.handleSubmit()}
-                >
-                  <Icon name="send" />
-                  <Text>SUBMIT</Text>
-                </Button>
-              </Content>
             </Form>
           </KeyboardAvoidingView>
         </Content>
+        <View
+          style={{
+            flex: 1,
+            bottom: 50,
+            left: 0,
+            right: 0,
+            justifyContent: "flex-end",
+            padding: 15
+          }}
+        >
+          <Button iconLeft block onPress={() => this.handleSubmit()}>
+            <Icon name="send" />
+            <Text>SUBMIT</Text>
+          </Button>
+        </View>
       </Container>
     );
   }

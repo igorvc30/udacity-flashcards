@@ -6,23 +6,7 @@ import {
   SUBMIT_QUIZ
 } from "../actions";
 
-const initial = {
-  decks: {
-    teste: {
-      title: "teste",
-      color: "#008000",
-      cards: [
-        { question: "teste1", answer: "teste1" },
-        { question: "teste2", answer: "teste2" },
-        { question: "teste3", answer: "teste3" }
-      ],
-      numberOfAttempts: 0,
-      highestScore: 0
-    }
-  }
-};
-
-function decksDetails(state = initial, action) {
+function decksDetails(state = {}, action) {
   switch (action.type) {
     case SET_DECKID: {
       return {
@@ -33,7 +17,6 @@ function decksDetails(state = initial, action) {
     case CREATE_DECK: {
       const newDeck = {
         ...action.deck,
-        color: "#008000",
         numberOfAttempts: 0,
         highestScore: 0,
         cards: []
@@ -65,6 +48,7 @@ function decksDetails(state = initial, action) {
     case SUBMIT_QUIZ:
       return {
         ...state,
+        lastQuiz: new Date(),
         decks: {
           ...state.decks,
           [action.deckId]: {

@@ -9,7 +9,6 @@ import MainTabNavigator from "./MainTabNavigator";
 import Quiz from "../screens/Quiz";
 
 const DeckDetailStack = createStackNavigator({
-  // DeckDetail: DeckDetail
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: { header: null }

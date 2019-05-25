@@ -7,7 +7,8 @@ import {
   Header,
   Left,
   Body,
-  Title
+  Title,
+  View
 } from "native-base";
 import { connect } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -28,7 +29,7 @@ class DeckDetail extends Component {
       <Container>
         <GoBackHeader
           title="DECK DETAIL"
-          color={deck.color}
+          color="black"
           navigation={navigation}
           destination="Main"
         />
@@ -55,12 +56,20 @@ class DeckDetail extends Component {
             <Text>DELETE DECK</Text>
           </Button>
         </Content>
-        <Content>
+        <View
+          style={{
+            flex: 1,
+            bottom: 50,
+            left: 0,
+            right: 0,
+            justifyContent: "flex-end",
+            padding: 15
+          }}
+        >
           <Button
             iconLeft
             dark
             block
-            style={{ margin: 10 }}
             onPress={() => this.props.navigation.push("CardForm")}
           >
             <MaterialCommunityIcons
@@ -70,15 +79,13 @@ class DeckDetail extends Component {
             />
             <Text>ADD CARD</Text>
           </Button>
-        </Content>
-        {deck.cards.length > 0 && (
-          <Content>
+          {deck.cards.length > 0 && (
             <Button
               iconLeft
               dark
               block
               transparent
-              style={{ margin: 10, borderWidth: 1, borderColor: "#000" }}
+              style={{ marginTop: 20, borderWidth: 1, borderColor: "#000" }}
               onPress={() => this.props.navigation.push("Quiz")}
             >
               <MaterialCommunityIcons
@@ -88,8 +95,8 @@ class DeckDetail extends Component {
               />
               <Text>START QUIZ</Text>
             </Button>
-          </Content>
-        )}
+          )}
+        </View>
       </Container>
     );
   }

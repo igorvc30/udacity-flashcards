@@ -10,7 +10,10 @@ import DecksList from "./../screens/DecksList";
 import DeckForm from "./../screens/DeckForm";
 
 const HomeStack = createStackNavigator({
-  DecksList: DecksList
+  DecksList: {
+    screen: DecksList,
+    navigationOptions: { header: null }
+  }
 });
 
 HomeStack.navigationOptions = {
@@ -28,7 +31,10 @@ HomeStack.navigationOptions = {
 };
 
 const DeckFormStack = createStackNavigator({
-  DeckForm: DeckForm
+  DeckForm: {
+    screen: DeckForm,
+    navigationOptions: { header: null }
+  }
 });
 
 DeckFormStack.navigationOptions = {

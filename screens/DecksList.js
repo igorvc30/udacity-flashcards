@@ -1,19 +1,25 @@
 import React, { Component } from "react";
-import { Container, Content, Text } from "native-base";
+import {
+  Container,
+  Content,
+  Text,
+  Header,
+  Body,
+  Title,
+  Left
+} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import Deck from "./../components/Deck";
 import { setDeckId } from "../store/actions";
-import decksDetails from "../store/reducers/index";
-class DecksList extends Component {
-  static navigationOptions = {
-    title: "DECKS AVAILABLE"
-  };
+import MainHeader from "./../components/MainHeader";
 
+class DecksList extends Component {
   render() {
     const { decks, decksIds, setDeckId, decksDetails } = this.props;
     return (
       <Container>
+        <MainHeader title="DECKS AVAILABLE" icon="cards-outline" />
         <Content style={{ margin: 20 }}>
           {decksIds &&
             decksIds.map(id => {

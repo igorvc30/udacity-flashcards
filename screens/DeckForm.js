@@ -8,20 +8,22 @@ import {
   Item,
   Input,
   Label,
-  H1
+  H1,
+  Content,
+  View
 } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { connect } from "react-redux";
-import { Col, Row, Grid } from "react-native-easy-grid";
-import { KeyboardAvoidingView } from "react-native";
 import { createDeck } from "../store/actions/index";
+import { KeyboardAvoidingView } from "react-native";
+import ColorPalette from "react-native-color-palette";
+import MainHeader from "./../components/MainHeader";
 
 class DeckForm extends Component {
-  static navigationOptions = {
-    title: "CREATE NEW DECK"
-  };
-
   state = {
-    title: ""
+    title: "",
+    color: "#EB9694"
   };
 
   handleSubmit() {
@@ -30,60 +32,99 @@ class DeckForm extends Component {
     }
   }
 
+  handleColorChange = color => {
+    this.setState({ color });
+  };
+
   render() {
     return (
       <Container>
+        <MainHeader title="CREATE NEW DECK" icon="credit-card-plus" />
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-          <Grid>
-            <Row
-              size={35}
+          <View
+            size={35}
+            style={{
+              justifyContent: "center",
+              margin: 10
+            }}
+          >
+            <H1
               style={{
-                alignItems: "center",
-                margin: 10
-              }}
-            >
-              <H1
-                style={{
-                  alignContent: "center"
-                }}
-              >
-                WHAT IS THE TITLE OF YOUR NEW DECK?
-              </H1>
-            </Row>
-
-            <Row
-              size={65}
-              style={{
-                alignItems: "center",
                 alignContent: "center"
               }}
             >
-              <Form>
-                <Item stackedLabel>
-                  <Label>Deck title</Label>
-                  <Input
-                    onChangeText={inputVal =>
-                      this.setState({ title: inputVal })
-                    }
-                    value={this.state.title}
-                  />
-                </Item>
-                <Button
-                  iconLeft
-                  block
-                  style={{ marginLeft: 10, marginTop: 20 }}
-                  onPress={() => this.handleSubmit()}
-                >
-                  <Icon name="send" />
-                  <Text>SUBMIT</Text>
-                </Button>
+              WHAT IS THE TITLE OF YOUR NEW DECK?
+            </H1>
+          </View>
 
-                <Item>
-                  <Text>{JSON.stringify(this.state)}</Text>
-                </Item>
-              </Form>
-            </Row>
-          </Grid>
+          <View
+            size={65}
+            style={{
+              alignItems: "center",
+              alignContent: "center"
+            }}
+          >
+            <Form>
+              <Item stackedLabel>
+                <Label>Deck title</Label>
+                <Input
+                  onChangeText={inputVal => this.setState({ title: inputVal })}
+                  value={this.state.title}
+                />
+              </Item>
+              <Item>
+                <ColorPalette
+                  onChange={color => this.handleColorChange(color)}
+                  value={this.state.color}
+                  colors={[
+                    "#DB3E00",
+                    "#FCCB00",
+                    "#008B02",
+                    "#006B76",
+                    "#1273DE",
+                    "#004DCF",
+                    "#5300EB",
+                    "#EB9694",
+                    "#FAD0C3",
+                    "#FEF3BD",
+                    "#C1E1C5",
+                    "#BEDADC",
+                    "#C4DEF6",
+                    "#D4C4FB"
+                  ]}
+                  title=""
+                  icon={
+                    <MaterialCommunityIcons
+                      name={"checkbox-blank-circle"}
+                      size={15}
+                      color={"black"}
+                    />
+                    // React-Native-Vector-Icons Example
+                  }
+                />
+              </Item>
+            </Form>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              bottom: 50,
+              left: 0,
+              right: 0,
+              justifyContent: "flex-end",
+              padding: 15
+            }}
+          >
+            <Button
+              iconLeft
+              block
+              style={{ marginLeft: 10, marginTop: 20 }}
+              onPress={() => this.handleSubmit()}
+            >
+              <Icon name="send" />
+              <Text>SUBMIT</Text>
+            </Button>
+          </View>
         </KeyboardAvoidingView>
       </Container>
     );
