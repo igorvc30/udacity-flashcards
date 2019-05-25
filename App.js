@@ -6,8 +6,13 @@ import { store, persistor } from "./store";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import { Constants } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
+import { setLocalNotification } from "./utils/helpers";
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   state = {
     isLoadingComplete: false
   };

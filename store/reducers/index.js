@@ -5,6 +5,10 @@ import {
   ADD_CARD,
   SUBMIT_QUIZ
 } from "../actions";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from "../../utils/helpers";
 
 function decksDetails(state = {}, action) {
   switch (action.type) {
@@ -46,9 +50,9 @@ function decksDetails(state = {}, action) {
       };
 
     case SUBMIT_QUIZ:
+      clearLocalNotification().then(setLocalNotification);
       return {
         ...state,
-        lastQuiz: new Date(),
         decks: {
           ...state.decks,
           [action.deckId]: {

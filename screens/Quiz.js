@@ -6,7 +6,7 @@ import {
   View,
   DeckSwiper,
   Text,
-  Content,
+  H2,
   Button,
   Body,
   Title,
@@ -74,6 +74,7 @@ class Quiz extends Component {
             )}
           />
         </View>
+
         {cardIndex <= totalQuestions && (
           <View
             style={{
@@ -84,6 +85,7 @@ class Quiz extends Component {
               left: 0,
               right: 0,
               justifyContent: "space-between",
+              alignItems: "center",
               padding: 15
             }}
           >
@@ -106,6 +108,8 @@ class Quiz extends Component {
               />
               <Text>WRONG</Text>
             </Button>
+            <H2>{`${cardIndex}/${totalQuestions}`}</H2>
+
             <Button
               success
               iconRight
