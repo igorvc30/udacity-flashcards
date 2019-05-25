@@ -12,7 +12,7 @@ import {
 import { connect } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Deck from "../components/Deck";
-import { deleteDeck } from "./../actions";
+import { deleteDeck } from "../store/actions";
 import GoBackHeader from "./../components/GoBackHeader";
 
 class DeckDetail extends Component {
@@ -90,12 +90,6 @@ class DeckDetail extends Component {
             </Button>
           </Content>
         )}
-
-        <Content>
-          <Text>{`STATE ${JSON.stringify(
-            this.state
-          )} >>> PROPS ${JSON.stringify(this.props)}`}</Text>
-        </Content>
       </Container>
     );
   }
@@ -103,13 +97,7 @@ class DeckDetail extends Component {
 
 function mapStateToProps(decksDetails) {
   return {
-    deck: decksDetails.decks[decksDetails.deckId] || {
-      title: JSON.stringify(navigation.state.params),
-      color: "#008000",
-      numberOfAttempts: 0,
-      highestScore: 0,
-      cards: []
-    }
+    deck: decksDetails.decks[decksDetails.deckId]
   };
 }
 

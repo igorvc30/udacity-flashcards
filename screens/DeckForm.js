@@ -13,7 +13,7 @@ import {
 import { connect } from "react-redux";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { KeyboardAvoidingView } from "react-native";
-import { createDeck } from "./../actions/index";
+import { createDeck } from "../store/actions/index";
 
 class DeckForm extends Component {
   static navigationOptions = {
@@ -21,14 +21,13 @@ class DeckForm extends Component {
   };
 
   state = {
-    title: "Testes hurry"
+    title: ""
   };
 
   handleSubmit() {
     if (this.state.title.length > 0) {
       this.props.createDeck(this.state);
     }
-    this.setState({ title: "submitido?" });
   }
 
   render() {

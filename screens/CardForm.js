@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCard } from "./../actions/index";
+import { addCard } from "../store/actions/index";
 import {
   Container,
   Button,
@@ -22,25 +22,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import GoBackHeader from "./../components/GoBackHeader";
 
 class CardForm extends Component {
-  // static navigationOptions = ({ navigation }) => {
-  //   return {
-  //     title: `Add new card to deck`,
-  //     headerLeft: (
-  //       <MaterialCommunityIcons
-  //         size={35}
-  //         style={{ marginLeft: 10 }}
-  //         name={"arrow-left"}
-  //         onPress={() => {
-  //           navigation.navigate("DeckDetail");
-  //         }}
-  //       />
-  //     )
-  //   };
-  // };
-
   state = {
-    question: "Testes hurry",
-    answer: "anythingm .... right isn't?"
+    question: "",
+    answer: ""
   };
 
   handleSubmit() {

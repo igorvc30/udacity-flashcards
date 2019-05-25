@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import QuestionCard from "./../components/QuestionCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { submitQuiz } from "./../actions/index";
+import { submitQuiz } from "../store/actions/index";
 
 class Quiz extends Component {
   state = {
@@ -92,7 +92,6 @@ class Quiz extends Component {
               iconLeft
               disabled={!showAnswer}
               onPress={() => {
-                // this._deckSwiper._root.swipeLeft()
                 this.handleToogleAnswer();
                 this._deckSwiper._root.swipeRight();
                 this.setState(prevState => ({

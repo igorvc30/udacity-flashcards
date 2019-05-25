@@ -1,9 +1,9 @@
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font, Icon } from "expo";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./reducers";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
+import { AppLoading, Asset, Font, Icon } from "expo";
 import { Constants } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 
@@ -31,11 +31,13 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Provider store={createStore(reducer)}>
-          <View style={styles.container}>
-            {this.getStatusBar()}
-            <AppNavigator />
-          </View>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <View style={styles.container}>
+              {this.getStatusBar()}
+              <AppNavigator />
+            </View>
+          </PersistGate>
         </Provider>
       );
     }

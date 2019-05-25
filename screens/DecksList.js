@@ -3,8 +3,8 @@ import { Container, Content, Text } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import Deck from "./../components/Deck";
-import { setDeckId } from "./../actions";
-import decksDetails from "./../reducers/index";
+import { setDeckId } from "../store/actions";
+import decksDetails from "../store/reducers/index";
 class DecksList extends Component {
   static navigationOptions = {
     title: "DECKS AVAILABLE"
