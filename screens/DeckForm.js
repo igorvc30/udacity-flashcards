@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   Button,
@@ -9,15 +10,11 @@ import {
   Input,
   Label,
   H1,
-  Content,
-  View,
-  Toast
+  View
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-import { connect } from "react-redux";
-import { createDeck } from "../store/actions/index";
 import { KeyboardAvoidingView } from "react-native";
+import { createDeck } from "../store/actions/index";
 import ColorPalette from "react-native-color-palette";
 import MainHeader from "./../components/MainHeader";
 import showToast from "./../utils/toastr";
@@ -27,6 +24,10 @@ class DeckForm extends Component {
     title: "",
     color: "#FFFFFF"
   };
+
+  componentDidMount() {
+    this.setState({ title: "", color: "#FFFFFF" });
+  }
 
   handleSubmit() {
     if (this.state.title.length > 0) {
@@ -51,15 +52,17 @@ class DeckForm extends Component {
         <MainHeader title="CREATE NEW DECK" icon="credit-card-plus" />
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
           <View
-            size={35}
             style={{
+              alignItems: "center",
+              alignContent: "center",
               justifyContent: "center",
+              minHeight: 200,
               margin: 10
             }}
           >
             <H1
               style={{
-                alignContent: "center"
+                textAlign: "center"
               }}
             >
               WHAT IS THE TITLE OF YOUR NEW DECK?
@@ -67,10 +70,10 @@ class DeckForm extends Component {
           </View>
 
           <View
-            size={65}
             style={{
               alignItems: "center",
-              alignContent: "center"
+              alignContent: "center",
+              justifyContent: "center"
             }}
           >
             <Form>
@@ -126,7 +129,7 @@ class DeckForm extends Component {
             <Button
               iconLeft
               block
-              style={{ marginLeft: 10, marginTop: 20 }}
+              style={{ marginTop: 20 }}
               onPress={() => this.handleSubmit()}
             >
               <Icon name="send" />

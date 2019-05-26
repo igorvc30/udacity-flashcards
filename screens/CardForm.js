@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addCard } from "../store/actions/index";
+import { KeyboardAvoidingView } from "react-native";
 import {
   Container,
   Button,
@@ -13,9 +13,9 @@ import {
   Content,
   View
 } from "native-base";
-import { KeyboardAvoidingView } from "react-native";
 import GoBackHeader from "./../components/GoBackHeader";
 import showToast from "./../utils/toastr";
+import { addCard } from "../store/actions/index";
 
 class CardForm extends Component {
   state = {
@@ -41,22 +41,28 @@ class CardForm extends Component {
     const { navigation } = this.props;
     return (
       <Container>
-        <GoBackHeader
-          title="ADD NEW CARD TO DECK"
-          color="black"
-          navigation={navigation}
-          destination="DeckDetail"
-        />
+        <GoBackHeader title="ADD NEW CARD TO DECK" navigation={navigation} />
         <Content>
-          <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+          <KeyboardAvoidingView
+            behavior="padding"
+            style={{
+              flex: 1,
+              alignItems: "center",
+              alignContent: "center",
+              justifyContent: "space-evenly",
+              minHeight: 400,
+              margin: 10
+            }}
+          >
             <Form>
-              <Content
-                style={{
-                  margin: 10,
-                  alignContent: "center"
-                }}
-              >
-                <Text>WHAT IS THE QUESTION OF YOUR NEW CARD?</Text>
+              <Content>
+                <Text
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
+                  WHAT IS THE QUESTION OF YOUR NEW CARD?
+                </Text>
 
                 <Item stackedLabel>
                   <Label>Question</Label>
@@ -70,7 +76,13 @@ class CardForm extends Component {
               </Content>
 
               <Content style={{ alignContent: "center", margin: 10 }}>
-                <Text>WHAT IS THE ANSWER OF YOUR NEW CARD?</Text>
+                <Text
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
+                  WHAT IS THE ANSWER OF YOUR NEW CARD?
+                </Text>
                 <Item stackedLabel>
                   <Label>Answer</Label>
                   <Input

@@ -14,8 +14,10 @@ import {
   Left
 } from "native-base";
 import QuestionCard from "./../components/QuestionCard";
+import Score from "./../components/Score";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { submitQuiz } from "../store/actions/index";
+import showToast from "./../utils/toastr";
 
 class Quiz extends Component {
   state = {
@@ -49,21 +51,27 @@ class Quiz extends Component {
               dark
               block
               transparent
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.popToTop()}
             >
               <MaterialCommunityIcons size={30} name="exit-run" />
               <Text>Quit</Text>
             </Button>
           </Right>
         </Header>
-        <View>
+        <View style={{ margin: 10 }}>
           <DeckSwiper
             looping={false}
             ref={c => (this._deckSwiper = c)}
             dataSource={deck.cards}
             renderEmpty={() => (
-              <View style={{ alignSelf: "center" }}>
-                <Text>GAME Over</Text>
+              <View
+                style={{
+                  alignSelf: "center",
+                  minHeight: "90%",
+                  minWidth: "100%"
+                }}
+              >
+                <Score total={totalQuestions} score={score} />
               </View>
             )}
             renderItem={card => (
@@ -107,7 +115,7 @@ class Quiz extends Component {
                 size={20}
                 name="thumb-down"
               />
-              <Text>WRONG</Text>
+              <Text>INCORRECT</Text>
             </Button>
             <H2>{`${cardIndex}/${totalQuestions}`}</H2>
 
@@ -146,11 +154,27 @@ class Quiz extends Component {
             }}
           >
             <Button
+              iconRight
+              block
+              style={{ marginBottom: 20 }}
+              onPress={() => {
+                navigation.push("Quiz");
+              }}
+            >
+              <Text>RESTART QUIZ</Text>
+              <MaterialCommunityIcons
+                style={{ color: "#fff", marginRight: 10 }}
+                size={20}
+                name="restart"
+              />
+            </Button>
+            <Button
               dark
               iconRight
               block
               onPress={() => {
                 submitQuiz(deck.title, score);
+                showToast("Quiz submitted!", "default");
                 navigation.goBack();
               }}
             >

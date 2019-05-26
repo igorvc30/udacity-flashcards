@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const QuestionCard = ({ card, showAnswer, toogleAnswer }) => {
   return (
     <Card style={styles.card}>
-      <CardItem bordered style={{ backgroundColor: "black" }}>
+      <CardItem bordered style={{ backgroundColor: "black", height: 60 }}>
         <Body>
           <Text style={{ color: "white" }}>{card.question}</Text>
         </Body>
@@ -22,7 +22,7 @@ const QuestionCard = ({ card, showAnswer, toogleAnswer }) => {
                 size={30}
                 name="eye"
               />
-              <Text>CHECK ANSWER</Text>
+              <Text>SHOW ANSWER</Text>
             </Button>
           </Content>
         )}
@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderColor: "black",
-    borderWidth: 1
+    borderWidth: 1,
+    margin: 10
   },
   cardItem: {
-    height: 300,
+    height: 400,
     flex: 1,
     alignContent: "center",
     padding: 10

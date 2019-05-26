@@ -1,19 +1,10 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Content,
-  Text,
-  Header,
-  Body,
-  Title,
-  Left,
-  H2
-} from "native-base";
-import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
+import { Container, Content, Text, H2 } from "native-base";
+import { TouchableOpacity } from "react-native";
 import Deck from "./../components/Deck";
-import { setDeckId } from "../store/actions";
 import MainHeader from "./../components/MainHeader";
+import { setDeckId } from "../store/actions";
 
 class DecksList extends Component {
   render() {
@@ -40,7 +31,6 @@ class DecksList extends Component {
                 </TouchableOpacity>
               );
             })}
-          <Text>{JSON.stringify(decksDetails)}</Text>
         </Content>
       </Container>
     );

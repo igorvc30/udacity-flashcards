@@ -1,20 +1,10 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Content,
-  Text,
-  Button,
-  Header,
-  Left,
-  Body,
-  Title,
-  View
-} from "native-base";
 import { connect } from "react-redux";
+import { Container, Content, Text, Button, View } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Deck from "../components/Deck";
-import { deleteDeck } from "../store/actions";
 import GoBackHeader from "./../components/GoBackHeader";
+import { deleteDeck } from "../store/actions";
 
 class DeckDetail extends Component {
   delete = () => {
@@ -30,11 +20,7 @@ class DeckDetail extends Component {
     }
     return (
       <Container>
-        <GoBackHeader
-          title="DECK DETAIL"
-          color="black"
-          navigation={navigation}
-        />
+        <GoBackHeader title="DECK DETAIL" navigation={navigation} />
         <Content
           style={{
             minHeight: 350,
@@ -43,9 +29,16 @@ class DeckDetail extends Component {
           }}
         >
           <Deck key={deck.title} deck={deck} />
-          <Button iconLeft bordered danger block onPress={() => this.delete()}>
+          <Button
+            style={{ marginTop: 30 }}
+            iconLeft
+            bordered
+            danger
+            block
+            onPress={() => this.delete()}
+          >
             <MaterialCommunityIcons
-              style={{ color: "#fff" }}
+              style={{ color: "red" }}
               size={30}
               name="trash-can-outline"
             />
@@ -66,7 +59,7 @@ class DeckDetail extends Component {
             iconLeft
             dark
             block
-            onPress={() => this.props.navigation.push("CardForm")}
+            onPress={() => navigation.push("CardForm")}
           >
             <MaterialCommunityIcons
               style={{ color: "#fff" }}
@@ -75,23 +68,22 @@ class DeckDetail extends Component {
             />
             <Text>ADD CARD</Text>
           </Button>
-          {deck.cards.length > 0 && (
-            <Button
-              iconLeft
-              dark
-              block
-              transparent
-              style={{ marginTop: 20, borderWidth: 1, borderColor: "#000" }}
-              onPress={() => this.props.navigation.push("Quiz")}
-            >
-              <MaterialCommunityIcons
-                style={{ color: "#000" }}
-                size={30}
-                name="gamepad-variant"
-              />
-              <Text>START QUIZ</Text>
-            </Button>
-          )}
+          <Button
+            iconLeft
+            dark
+            block
+            transparent
+            disabled={deck.cards.length === 0}
+            style={{ marginTop: 20, borderWidth: 1, borderColor: "#000" }}
+            onPress={() => navigation.push("Quiz")}
+          >
+            <MaterialCommunityIcons
+              style={{ color: "#000" }}
+              size={30}
+              name="gamepad-variant"
+            />
+            <Text>START QUIZ</Text>
+          </Button>
         </View>
       </Container>
     );

@@ -8,6 +8,7 @@ import MainTabNavigator from "./MainTabNavigator";
 import DeckDetail from "../screens/DeckDetail";
 import CardForm from "../screens/CardForm";
 import Quiz from "../screens/Quiz";
+import DeckForm from "./../screens/DeckForm";
 
 const DeckDetailStack = createStackNavigator({
   DeckDetail: {
@@ -20,6 +21,10 @@ const DeckDetailStack = createStackNavigator({
   },
   Quiz: {
     screen: Quiz,
+    navigationOptions: { header: null }
+  },
+  DeckForm: {
+    screen: DeckForm,
     navigationOptions: { header: null }
   }
 });
@@ -43,6 +48,10 @@ const HomeStack = createStackNavigator({
   },
   Quiz: {
     screen: Quiz,
+    navigationOptions: { header: null }
+  },
+  DeckForm: {
+    screen: DeckForm,
     navigationOptions: { header: null }
   }
 });

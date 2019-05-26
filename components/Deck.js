@@ -1,18 +1,5 @@
-import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Text,
-  Button,
-  Left,
-  Body,
-  Right,
-  H2
-} from "native-base";
-
+import React from "react";
+import { Content, Card, CardItem, Text, Left, Right, H2 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Deck = ({ deck }) => {
