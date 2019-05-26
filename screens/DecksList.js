@@ -6,7 +6,8 @@ import {
   Header,
   Body,
   Title,
-  Left
+  Left,
+  H2
 } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
@@ -20,7 +21,10 @@ class DecksList extends Component {
     return (
       <Container>
         <MainHeader title="DECKS AVAILABLE" icon="cards-outline" />
-        <Content style={{ margin: 20 }}>
+        <Content style={{ margin: 10 }}>
+          {decksIds.length === 0 && (
+            <H2>There is no deck available, please create a new one.</H2>
+          )}
           {decksIds &&
             decksIds.map(id => {
               const deck = decks[id];

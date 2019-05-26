@@ -10,7 +10,8 @@ import {
   Button,
   Body,
   Title,
-  Right
+  Right,
+  Left
 } from "native-base";
 import QuestionCard from "./../components/QuestionCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -36,8 +37,11 @@ class Quiz extends Component {
     return (
       <Container>
         <Header style={{ backgroundColor: deck.color }}>
+          <Left>
+            <MaterialCommunityIcons size={30} name="gamepad-variant" />
+          </Left>
           <Body>
-            <Title>QUIZ</Title>
+            <Title style={{ color: "#000" }}>QUIZ</Title>
           </Body>
           <Right>
             <Button
@@ -47,11 +51,8 @@ class Quiz extends Component {
               transparent
               onPress={() => navigation.push("DeckDetail")}
             >
-              <MaterialCommunityIcons
-                // style={{ color: "#000" }}
-                size={30}
-                name="exit-run"
-              />
+              <MaterialCommunityIcons size={30} name="exit-run" />
+              <Text>Quit</Text>
             </Button>
           </Right>
         </Header>

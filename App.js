@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import { Root } from "native-base";
 import { Constants } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 import { setLocalNotification } from "./utils/helpers";
@@ -36,14 +37,16 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <View style={styles.container}>
-              {this.getStatusBar()}
-              <AppNavigator />
-            </View>
-          </PersistGate>
-        </Provider>
+        <Root>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <View style={styles.container}>
+                {this.getStatusBar()}
+                <AppNavigator />
+              </View>
+            </PersistGate>
+          </Provider>
+        </Root>
       );
     }
   }

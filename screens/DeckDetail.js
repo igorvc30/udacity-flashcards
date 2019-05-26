@@ -36,18 +36,12 @@ class DeckDetail extends Component {
         <Content
           style={{
             minHeight: 350,
+            margin: 10,
             flex: 1
           }}
         >
           <Deck key={deck.title} deck={deck} />
-          <Button
-            iconLeft
-            bordered
-            danger
-            block
-            style={{ margin: 10 }}
-            onPress={() => this.delete()}
-          >
+          <Button iconLeft bordered danger block onPress={() => this.delete()}>
             <MaterialCommunityIcons
               style={{ color: "#fff" }}
               size={30}

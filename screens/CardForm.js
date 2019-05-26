@@ -14,8 +14,8 @@ import {
   View
 } from "native-base";
 import { KeyboardAvoidingView } from "react-native";
-
 import GoBackHeader from "./../components/GoBackHeader";
+import showToast from "./../utils/toastr";
 
 class CardForm extends Component {
   state = {
@@ -28,6 +28,12 @@ class CardForm extends Component {
     const { question, answer } = this.state;
     if (question.length > 0 && answer.length > 0) {
       addCard(deckId, this.state);
+      this.setState({
+        question: "",
+        answer: ""
+      });
+    } else {
+      showToast("Please type a question and answer for your card.", "warning");
     }
   }
 
@@ -63,7 +69,7 @@ class CardForm extends Component {
                 </Item>
               </Content>
 
-              <Content style={{ alignContent: "center" }}>
+              <Content style={{ alignContent: "center", margin: 10 }}>
                 <Text>WHAT IS THE ANSWER OF YOUR NEW CARD?</Text>
                 <Item stackedLabel>
                   <Label>Answer</Label>

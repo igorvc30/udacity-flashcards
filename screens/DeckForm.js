@@ -10,7 +10,8 @@ import {
   Label,
   H1,
   Content,
-  View
+  View,
+  Toast
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -19,16 +20,24 @@ import { createDeck } from "../store/actions/index";
 import { KeyboardAvoidingView } from "react-native";
 import ColorPalette from "react-native-color-palette";
 import MainHeader from "./../components/MainHeader";
+import showToast from "./../utils/toastr";
 
 class DeckForm extends Component {
   state = {
     title: "",
-    color: "#EB9694"
+    color: "#FFFFFF"
   };
 
   handleSubmit() {
     if (this.state.title.length > 0) {
       this.props.createDeck(this.state);
+      this.setState({
+        title: "",
+        color: "#FFFFFF"
+      });
+      this.props.navigation.pop();
+    } else {
+      showToast("Please choose a title for your deck.", "warning");
     }
   }
 
@@ -80,17 +89,17 @@ class DeckForm extends Component {
                     "#DB3E00",
                     "#FCCB00",
                     "#008B02",
-                    "#006B76",
                     "#1273DE",
                     "#004DCF",
                     "#5300EB",
-                    "#EB9694",
+                    "#C0C0C0",
                     "#FAD0C3",
                     "#FEF3BD",
                     "#C1E1C5",
                     "#BEDADC",
                     "#C4DEF6",
-                    "#D4C4FB"
+                    "#D4C4FB",
+                    "#FFFFFF"
                   ]}
                   title=""
                   icon={
@@ -99,7 +108,6 @@ class DeckForm extends Component {
                       size={15}
                       color={"black"}
                     />
-                    // React-Native-Vector-Icons Example
                   }
                 />
               </Item>

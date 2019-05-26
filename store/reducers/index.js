@@ -9,6 +9,7 @@ import {
   clearLocalNotification,
   setLocalNotification
 } from "../../utils/helpers";
+import showToast from "./../../utils/toastr";
 
 function decksDetails(state = {}, action) {
   switch (action.type) {
@@ -25,6 +26,7 @@ function decksDetails(state = {}, action) {
         highestScore: 0,
         cards: []
       };
+      showToast("A new deck was created!", "success");
       return {
         ...state,
         decks: {
@@ -33,11 +35,17 @@ function decksDetails(state = {}, action) {
         }
       };
     }
-    case DELETE_DECK:
-      delete state.decks[`${action.deckId}`];
-      return state;
+    case DELETE_DECK: {
+      showToast("The deck was deleted.", "danger");
+      let { [action.deckId]: deletedItem, ...newDeck } = state.decks;
+      return {
+        ...state,
+        decks: newDeck
+      };
+    }
 
     case ADD_CARD:
+      showToast("A new card was added!", "success");
       return {
         ...state,
         decks: {
