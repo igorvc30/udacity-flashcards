@@ -49,7 +49,7 @@ class Quiz extends Component {
               dark
               block
               transparent
-              onPress={() => navigation.push("DeckDetail")}
+              onPress={() => navigation.goBack()}
             >
               <MaterialCommunityIcons size={30} name="exit-run" />
               <Text>Quit</Text>
@@ -151,7 +151,7 @@ class Quiz extends Component {
               block
               onPress={() => {
                 submitQuiz(deck.title, score);
-                navigation.push("DeckDetail");
+                navigation.goBack();
               }}
             >
               <Text>SUBMIT</Text>

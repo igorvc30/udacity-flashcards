@@ -2,15 +2,10 @@ import React from "react";
 import { Button, Header, Left, Body, Title } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const GoBackHeader = ({ title, color, navigation, destination }) => (
+const GoBackHeader = ({ title, color, navigation }) => (
   <Header style={{ backgroundColor: color }}>
     <Left>
-      <Button
-        dark
-        block
-        transparent
-        onPress={() => navigation.navigate(destination)}
-      >
+      <Button dark block transparent onPress={() => navigation.goBack()}>
         <MaterialCommunityIcons
           style={{ color: "white" }}
           size={30}

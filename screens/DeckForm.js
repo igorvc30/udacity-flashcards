@@ -35,7 +35,7 @@ class DeckForm extends Component {
         title: "",
         color: "#FFFFFF"
       });
-      this.props.navigation.pop();
+      this.props.navigation.goBack();
     } else {
       showToast("Please choose a title for your deck.", "warning");
     }

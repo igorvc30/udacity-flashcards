@@ -4,7 +4,6 @@ import {
   createStackNavigator,
   createMaterialTopTabNavigator
 } from "react-navigation";
-
 import TabBarIcon from "../components/TabBarIcon";
 import DecksList from "./../screens/DecksList";
 import DeckForm from "./../screens/DeckForm";

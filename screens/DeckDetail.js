@@ -20,18 +20,20 @@ class DeckDetail extends Component {
   delete = () => {
     const { deleteDeck, navigation, deck } = this.props;
     deleteDeck(deck.title);
-    navigation.navigate("Main");
+    navigation.goBack();
   };
 
   render() {
     const { deck, navigation } = this.props;
+    if (deck === undefined) {
+      return <></>;
+    }
     return (
       <Container>
         <GoBackHeader
           title="DECK DETAIL"
           color="black"
           navigation={navigation}
-          destination="Main"
         />
         <Content
           style={{

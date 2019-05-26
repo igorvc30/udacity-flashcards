@@ -42,7 +42,7 @@ class CardForm extends Component {
     return (
       <Container>
         <GoBackHeader
-          title="Add new card to deck"
+          title="ADD NEW CARD TO DECK"
           color="black"
           navigation={navigation}
           destination="DeckDetail"
