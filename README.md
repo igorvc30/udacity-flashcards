@@ -1,4 +1,4 @@
-#Mobile FlashCards
+# Mobile FlashCards
 
 This is the the final assessment project for Udacity's React Native course where a Mobile Flashcard was created to help users' study.
 
@@ -51,7 +51,7 @@ $ expo start
 Once the Expo Devtools page is loaded, change the Connection to LOCAL (for better liverload experience) and then Click at the button: Run Android Device/Emulator. (Remember to enable Developer option and USB debugging in case you use your smartphone.)
 
 [react]: https://reactjs.org/
-[react]: https://facebook.github.io/react-native/
+[react native]: https://facebook.github.io/react-native/
 [react navigation]: https://reactnavigation.org/docs/en/getting-started.html/
 [nativebase]: https://nativebase.io/
 [airbnb react/jsx style guide]: https://github.com/airbnb/javascript/tree/master/react
