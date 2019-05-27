@@ -16,12 +16,12 @@ function decksDetails(state = {}, action) {
     case SET_DECKID: {
       return {
         ...state,
-        deckId: action.deckId
+        deckId: action.payload.deckId
       };
     }
     case CREATE_DECK: {
       const newDeck = {
-        ...action.deck,
+        ...action.payload.deck,
         numberOfAttempts: 0,
         highestScore: 0,
         cards: []
@@ -31,13 +31,13 @@ function decksDetails(state = {}, action) {
         ...state,
         decks: {
           ...state.decks,
-          [action.deck.title]: newDeck
+          [action.payload.deck.title]: newDeck
         }
       };
     }
     case DELETE_DECK: {
       showToast("The deck was deleted.", "danger");
-      let { [action.deckId]: deletedItem, ...newDeck } = state.decks;
+      let { [action.payload.deckId]: deletedItem, ...newDeck } = state.decks;
       return {
         ...state,
         decks: newDeck
@@ -50,9 +50,11 @@ function decksDetails(state = {}, action) {
         ...state,
         decks: {
           ...state.decks,
-          [action.deckId]: {
-            ...state.decks[action.deckId],
-            cards: state.decks[action.deckId].cards.concat(action.card)
+          [action.payload.deckId]: {
+            ...state.decks[action.payload.deckId],
+            cards: state.decks[action.payload.deckId].cards.concat(
+              action.payload.card
+            )
           }
         }
       };
@@ -63,13 +65,15 @@ function decksDetails(state = {}, action) {
         ...state,
         decks: {
           ...state.decks,
-          [action.deckId]: {
-            ...state.decks[action.deckId],
-            numberOfAttempts: state.decks[action.deckId].numberOfAttempts + 1,
+          [action.payload.deckId]: {
+            ...state.decks[action.payload.deckId],
+            numberOfAttempts:
+              state.decks[action.payload.deckId].numberOfAttempts + 1,
             highestScore:
-              state.decks[action.deckId].highestScore <= action.score
-                ? action.score
-                : state.decks[action.deckId].highestScore
+              state.decks[action.payload.deckId].highestScore <=
+              action.payload.score
+                ? action.payload.score
+                : state.decks[action.payload.deckId].highestScore
           }
         }
       };

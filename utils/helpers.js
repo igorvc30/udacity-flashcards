@@ -9,21 +9,19 @@ export function clearLocalNotification() {
   );
 }
 
-function createNotification() {
-  return {
-    title: "Let's keep studing!✌🤓",
-    body: "👋 hey, don't forget to take some quizzes today!",
-    ios: {
-      sound: true
-    },
-    android: {
-      sound: true,
-      priority: "high",
-      sticky: false,
-      vibrate: true
-    }
-  };
-}
+const notificationSetting = {
+  title: "Let's keep studing!✌🤓",
+  body: "👋 hey, don't forget to take some quizzes today!",
+  ios: {
+    sound: true
+  },
+  android: {
+    sound: true,
+    priority: "high",
+    sticky: false,
+    vibrate: true
+  }
+};
 
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
@@ -39,7 +37,7 @@ export function setLocalNotification() {
             tomorrow.setHours(19);
             tomorrow.setMinutes(0);
 
-            Notifications.scheduleLocalNotificationAsync(createNotification(), {
+            Notifications.scheduleLocalNotificationAsync(notificationSetting, {
               time: tomorrow,
               repeat: "day"
             });

@@ -8,7 +8,7 @@ import { setDeckId } from "../store/actions";
 
 class DecksList extends Component {
   render() {
-    const { decks, decksIds, setDeckId, decksDetails } = this.props;
+    const { decks, decksIds, setDeckId, navigation } = this.props;
     return (
       <Container>
         <MainHeader title="DECKS AVAILABLE" icon="cards-outline" />
@@ -24,7 +24,7 @@ class DecksList extends Component {
                   key={id}
                   onPress={() => {
                     setDeckId(id);
-                    this.props.navigation.push("DeckDetail");
+                    navigation.push("DeckDetail");
                   }}
                 >
                   <Deck key={id} deck={deck} />
@@ -40,8 +40,7 @@ class DecksList extends Component {
 function mapStateToProps(decksDetails) {
   return {
     decks: decksDetails.decks,
-    decksIds: decksDetails.decks ? Object.keys(decksDetails.decks) : [],
-    decksDetails
+    decksIds: decksDetails.decks ? Object.keys(decksDetails.decks) : []
   };
 }
 

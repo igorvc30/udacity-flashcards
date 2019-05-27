@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import { StyleSheet } from "react-native";
 import {
   Container,
   Header,
@@ -19,7 +20,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { submitQuiz } from "../store/actions/index";
 import showToast from "./../utils/toastr";
 
-class Quiz extends Component {
+class Quiz extends PureComponent {
   state = {
     score: 0,
     showAnswer: false,
@@ -64,13 +65,7 @@ class Quiz extends Component {
             ref={c => (this._deckSwiper = c)}
             dataSource={deck.cards}
             renderEmpty={() => (
-              <View
-                style={{
-                  alignSelf: "center",
-                  minHeight: "90%",
-                  minWidth: "100%"
-                }}
-              >
+              <View style={styles.scoreView}>
                 <Score total={totalQuestions} score={score} />
               </View>
             )}
@@ -85,19 +80,7 @@ class Quiz extends Component {
         </View>
 
         {cardIndex <= totalQuestions && (
-          <View
-            style={{
-              flexDirection: "row",
-              flex: 1,
-              position: "absolute",
-              bottom: 50,
-              left: 0,
-              right: 0,
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: 15
-            }}
-          >
+          <View style={styles.feedbackButtons}>
             <Button
               danger
               iconLeft
@@ -111,7 +94,7 @@ class Quiz extends Component {
               }}
             >
               <MaterialCommunityIcons
-                style={{ color: "#fff", marginLeft: 10 }}
+                style={[styles.iconBlack, { marginLeft: 10, marginRight: 0 }]}
                 size={20}
                 name="thumb-down"
               />
@@ -135,7 +118,7 @@ class Quiz extends Component {
             >
               <Text>CORRECT</Text>
               <MaterialCommunityIcons
-                style={{ color: "#fff", marginRight: 10 }}
+                style={styles.iconBlack}
                 size={20}
                 name="thumb-up"
               />
@@ -143,16 +126,7 @@ class Quiz extends Component {
           </View>
         )}
         {cardIndex > totalQuestions && (
-          <View
-            style={{
-              flex: 1,
-              bottom: 50,
-              left: 0,
-              right: 0,
-              justifyContent: "flex-end",
-              padding: 15
-            }}
-          >
+          <View style={styles.endQuizButtons}>
             <Button
               iconRight
               block
@@ -163,7 +137,7 @@ class Quiz extends Component {
             >
               <Text>RESTART QUIZ</Text>
               <MaterialCommunityIcons
-                style={{ color: "#fff", marginRight: 10 }}
+                style={styles.iconBlack}
                 size={20}
                 name="restart"
               />
@@ -180,7 +154,7 @@ class Quiz extends Component {
             >
               <Text>SUBMIT</Text>
               <MaterialCommunityIcons
-                style={{ color: "#fff", marginRight: 10 }}
+                style={styles.iconBlack}
                 size={20}
                 name="send"
               />
@@ -203,6 +177,34 @@ function mapDispatchToProps(dispatch) {
     submitQuiz: (deckId, score) => dispatch(submitQuiz(deckId, score))
   };
 }
+
+const styles = StyleSheet.create({
+  endQuizButtons: {
+    flex: 1,
+    bottom: 50,
+    left: 0,
+    right: 0,
+    justifyContent: "flex-end",
+    padding: 15
+  },
+  iconBlack: { color: "#fff", marginRight: 10 },
+  feedbackButtons: {
+    flexDirection: "row",
+    flex: 1,
+    position: "absolute",
+    bottom: 50,
+    left: 0,
+    right: 0,
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15
+  },
+  scoreView: {
+    alignSelf: "center",
+    minHeight: "90%",
+    minWidth: "100%"
+  }
+});
 
 export default connect(
   mapStateToProps,

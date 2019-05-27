@@ -29,6 +29,21 @@ const DeckDetailStack = createStackNavigator({
   }
 });
 
+const FormStack = createStackNavigator({
+  Home: {
+    screen: MainTabNavigator,
+    navigationOptions: { header: null }
+  },
+  DeckForm: {
+    screen: DeckForm,
+    navigationOptions: { header: null }
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: { header: null }
+  }
+});
+
 const HomeStack = createStackNavigator({
   Home: {
     screen: MainTabNavigator,
@@ -53,11 +68,16 @@ const HomeStack = createStackNavigator({
   DeckForm: {
     screen: DeckForm,
     navigationOptions: { header: null }
+  },
+  FormStack: {
+    screen: FormStack,
+    navigationOptions: { header: null }
   }
 });
 
 export default createAppContainer(
   createSwitchNavigator({
-    Home: HomeStack
+    Home: HomeStack,
+    Form: FormStack
   })
 );

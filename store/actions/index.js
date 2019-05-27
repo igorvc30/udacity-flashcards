@@ -8,44 +8,41 @@ export const SUBMIT_QUIZ = "SUBMIT_QUIZ";
 export function setDeckId(deckId) {
   return {
     type: SET_DECKID,
-    deckId
+    payload: { deckId }
   };
 }
 
 export function createDeck(deck) {
   return {
     type: CREATE_DECK,
-    deck
+    payload: { deck }
   };
 }
 
 export function editDeck(deckId, deck) {
   return {
     type: EDIT_DECK,
-    deckId,
-    deck
+    payload: { deckId, deck }
   };
 }
 
 export function deleteDeck(deckId) {
   return {
     type: DELETE_DECK,
-    deckId
+    payload: { deckId }
   };
 }
 
 export function addCard(deckId, card) {
   return {
     type: ADD_CARD,
-    card,
-    deckId
+    payload: { card, deckId }
   };
 }
 
 export function submitQuiz(deckId, score) {
   return {
     type: SUBMIT_QUIZ,
-    score,
-    deckId
+    payload: { score, deckId }
   };
 }

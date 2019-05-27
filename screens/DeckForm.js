@@ -13,8 +13,8 @@ import {
   View
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { KeyboardAvoidingView } from "react-native";
-import { createDeck } from "../store/actions/index";
+import { KeyboardAvoidingView, StyleSheet } from "react-native";
+import { createDeck, setDeckId } from "../store/actions/index";
 import ColorPalette from "react-native-color-palette";
 import MainHeader from "./../components/MainHeader";
 import showToast from "./../utils/toastr";
@@ -30,13 +30,15 @@ class DeckForm extends Component {
   }
 
   handleSubmit() {
+    const { createDeck, navigation, setDeckId } = this.props;
     if (this.state.title.length > 0) {
-      this.props.createDeck(this.state);
+      setDeckId(this.state.title);
+      createDeck(this.state);
       this.setState({
         title: "",
         color: "#FFFFFF"
       });
-      this.props.navigation.goBack();
+      navigation.push("DeckDetail");
     } else {
       showToast("Please choose a title for your deck.", "warning");
     }
@@ -51,15 +53,7 @@ class DeckForm extends Component {
       <Container>
         <MainHeader title="CREATE NEW DECK" icon="credit-card-plus" />
         <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-          <View
-            style={{
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "center",
-              minHeight: 200,
-              margin: 10
-            }}
-          >
+          <View style={styles.formTitle}>
             <H1
               style={{
                 textAlign: "center"
@@ -69,13 +63,7 @@ class DeckForm extends Component {
             </H1>
           </View>
 
-          <View
-            style={{
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "center"
-            }}
-          >
+          <View style={styles.formItem}>
             <Form>
               <Item stackedLabel>
                 <Label>Deck title</Label>
@@ -88,22 +76,7 @@ class DeckForm extends Component {
                 <ColorPalette
                   onChange={color => this.handleColorChange(color)}
                   value={this.state.color}
-                  colors={[
-                    "#DB3E00",
-                    "#FCCB00",
-                    "#008B02",
-                    "#1273DE",
-                    "#004DCF",
-                    "#5300EB",
-                    "#C0C0C0",
-                    "#FAD0C3",
-                    "#FEF3BD",
-                    "#C1E1C5",
-                    "#BEDADC",
-                    "#C4DEF6",
-                    "#D4C4FB",
-                    "#FFFFFF"
-                  ]}
+                  colors={colorsArray}
                   title=""
                   icon={
                     <MaterialCommunityIcons
@@ -116,16 +89,7 @@ class DeckForm extends Component {
               </Item>
             </Form>
           </View>
-          <View
-            style={{
-              flex: 1,
-              bottom: 50,
-              left: 0,
-              right: 0,
-              justifyContent: "flex-end",
-              padding: 15
-            }}
-          >
+          <View style={styles.submitButton}>
             <Button
               iconLeft
               block
@@ -144,9 +108,50 @@ class DeckForm extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    createDeck: deck => dispatch(createDeck(deck))
+    createDeck: deck => dispatch(createDeck(deck)),
+    setDeckId: deckId => dispatch(setDeckId(deckId))
   };
 }
+
+const styles = StyleSheet.create({
+  submitButton: {
+    flex: 1,
+    bottom: 50,
+    left: 0,
+    right: 0,
+    justifyContent: "flex-end",
+    padding: 15
+  },
+  formItem: {
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center"
+  },
+  formTitle: {
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    minHeight: 200,
+    margin: 10
+  }
+});
+
+const colorsArray = [
+  "#DB3E00",
+  "#FCCB00",
+  "#008B02",
+  "#1273DE",
+  "#004DCF",
+  "#5300EB",
+  "#C0C0C0",
+  "#FAD0C3",
+  "#FEF3BD",
+  "#C1E1C5",
+  "#BEDADC",
+  "#C4DEF6",
+  "#D4C4FB",
+  "#FFFFFF"
+];
 
 export default connect(
   null,
